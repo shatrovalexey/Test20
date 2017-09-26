@@ -140,6 +140,18 @@
 		}
 
 		/**
+		* Вывод средств со счёта
+		* @return array инструкции для дальнейшей обработки запроса
+		*/
+		public function withdrawalAction( ) {
+			list( , $user_id ) = $this->__ids( ) ;
+			$amount = $this->__arg( 'amount' ) ;
+			$result = $this->account->withdrawal( $user_id , $amount ) ;
+
+			return $this->__json( $result ) ;
+		}
+
+		/**
 		* Информация о транзакциях счёта пользователя
 		* @return array инструкции для дальнейшей обработки запроса
 		*/

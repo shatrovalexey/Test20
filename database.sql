@@ -53,7 +53,7 @@ CREATE TABLE `account_history` (
   `id` bigint(22) unsigned NOT NULL AUTO_INCREMENT COMMENT 'идентификатор',
   `account_id` bigint(22) unsigned NOT NULL COMMENT 'идентификатор счёта',
   `amount` decimal(10,2) unsigned NOT NULL COMMENT 'сумма',
-  `array` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0=ввод, 1=вывод',
+  `array` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0=дебит, 1=кредит',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'дата\\время создания',
   PRIMARY KEY (`id`),
   KEY `fk_account_history_account_idx` (`account_id`),
@@ -127,10 +127,10 @@ DROP TABLE IF EXISTS `session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `session` (
-  `id` char(32) NOT NULL,
-  `user_id` bigint(22) unsigned NOT NULL,
-  `expires` datetime NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id` char(32) NOT NULL COMMENT 'идентификатор',
+  `user_id` bigint(22) unsigned NOT NULL COMMENT 'идентификатор пользователя',
+  `expires` datetime NOT NULL COMMENT 'дата\\время истечения актуальности',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'дата\\время создания',
   PRIMARY KEY (`id`),
   KEY `user_id_idx` (`user_id`),
   KEY `user_id_expires_idx` (`user_id`,`expires`),
@@ -182,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-26 11:10:19
+-- Dump completed on 2017-09-26 12:59:26

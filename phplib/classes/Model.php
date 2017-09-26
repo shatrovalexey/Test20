@@ -46,6 +46,39 @@
 		}
 
 		/**
+		* Одно значение результата запроса
+		* @param string $sql - SQL-запрос
+		* @param array $args - аргументы запроса
+		* @param int $col - номер столбца
+		* @return mixed - столбец первой возвращённой записи
+		*/
+
+		protected function __fetchColumn( $sql , $args = array( ) , $col = 0 ) {
+			$sth = $this->dbh->prepare( $sql ) ;
+			$sth->execute( $args ) ;
+			$rows = $sth->fetchAll( \PDO::FETCH_NUM ) ;
+			$sth->closeCursor( ) ;
+
+			if ( empty( $rows ) ) {
+				return null ;
+			}
+
+			return $row[ $col ] ;
+		}
+
+		/**
+		* Последний созданный идентификатор
+		* @return int
+		*/
+		protected function __last_insert_id( ) {
+			return $this->__fetchColumn( '
+SELECT
+	last_insert_id( ) AS `id` ;
+			' ) ;
+		}
+
+
+		/**
 		* Получение значения HTTP-аргумента
 		* @param string $name имя переменной HTTP-запроса
 		* @return mixed
