@@ -131,7 +131,10 @@ CREATE TABLE `session` (
   `user_id` bigint(22) unsigned NOT NULL,
   `expires` datetime NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id_idx` (`user_id`),
+  KEY `user_id_expires_idx` (`user_id`,`expires`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='сессии';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -179,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-26 11:08:48
+-- Dump completed on 2017-09-26 11:10:19
