@@ -56,14 +56,10 @@
 		protected function __fetchColumn( $sql , $args = array( ) , $col = 0 ) {
 			$sth = $this->dbh->prepare( $sql ) ;
 			$sth->execute( $args ) ;
-			$rows = $sth->fetchAll( \PDO::FETCH_NUM ) ;
+			$result = $sth->fetchColumn( $col ) ;
 			$sth->closeCursor( ) ;
 
-			if ( empty( $rows ) ) {
-				return null ;
-			}
-
-			return $row[ $col ] ;
+			return $result ;
 		}
 
 		/**
@@ -71,7 +67,7 @@
 		* @return int
 		*/
 		protected function __last_insert_id( ) {
-			return $this->__fetchColumn( '
+			return $this->dbh->fetchColumn( '
 SELECT
 	last_insert_id( ) AS `id` ;
 			' ) ;

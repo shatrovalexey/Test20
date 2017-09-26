@@ -18,8 +18,9 @@
 		*/
 		public function withdrawal( $user_id , $amount ) {
 			$account_id = $this->id( $user_id ) ;
+			$result = $this->creator->account_history->create( $account_id , $amount , true ) ;
 
-			return $this->creator->account_history->create( $account_id , $amount , true ) ;
+			return $result ;
 		}
 
 		/**
@@ -28,17 +29,15 @@
 		* @return int - идентификатор счёта
 		*/
 		public function id( $user_id ) {
-			foreach ( $this->dbh->query( '
+			return $this->__fetchSingle( '
 SELECT
 	`a1`.`id` AS `account_id`
 FROM
 	`account` AS `a1`
 WHERE
 	( `a1`.`user_id` = :user_id )
-			' )->fetchAll( \PDO::FETCH_NUM ) as $i => $row ) {
-				return $row[ 0 ] ;
-			}
-
-			return null ;
+			' , array(
+				'user_id' => $user_id
+			) ) ;
 		}
 	}

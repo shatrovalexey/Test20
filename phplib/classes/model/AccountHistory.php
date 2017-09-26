@@ -20,7 +20,7 @@
 		public function create( $account_id , $amount , $array ) {
 			$account_id = $this->id( $user_id ) ;
 
-			if ( ! $this->dbh->query( "
+			if ( $this->dbh->query( "
 INSERT INTO
 	`account_history`
 SET
@@ -28,9 +28,9 @@ SET
 	`amount` := :amount ,
 	`array` := :array ;
 			" ) ) {
-				return null ;
+				return $this->__last_insert_id( ) ;
 			}
 
-			return $this->__last_insert_id( ) ;
+			return null ;
 		}
 	}
