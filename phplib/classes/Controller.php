@@ -35,18 +35,73 @@
 		}
 
 		/**
-		* Получение значения HTTP-аргумента
-		* @param string $name имя переменной HTTP-запроса
+		* Получение значений HTTP-аргументов.
+		* @param array $name имена аргументов HTTP-запроса
 		* @return mixed
+		* если передано только одно имя аргумента, то возвращается скаляр,
+		* если передано много имён, то возвращает массив
 		*/
-		public function arg( $name ) {
+		protected function __arg( ) {
 			$request = &$this->creator->request ;
+			$result = array( ) ;
 
-			if ( ! isset( $request[ $name ] ) ) {
-				return null ;
+			foreach ( func_get_args( ) as $name ) {
+				if ( ! isset( $request[ $name ] ) ) {
+					$result[] = null ;
+
+					continue ;
+				}
+
+				$result[] = $request[ $name ] ;
 			}
 
-			return $request[ $name ] ;
+			if ( count( $result ) == 1 ) {
+				return $result[ 0 ] ;
+			}
+
+			return $result ;
+		}
+
+		/**
+		* Оформление ответа для вывода в формате JSON
+		* @return array инструкции для дальнейшей обработки запроса
+		* view - имя файла представления
+		* result - дополнительные данные для обработки запроса
+		* result.data - данные для вывода в теле HTTP-ответа
+		* result.passthru - выводить представление не внутри общего представления, а сразу
+		* result.key - имя переменной для присвоения массива сообщений
+		*/
+		protected function __json( &$data ) {
+			return array(
+				'result' => array(
+					'data' => $data
+				) ,
+				'view' => 'json' ,
+				'headers' => array(
+					array(
+						$this->creator->config[ 'http' ][ 'header' ][ 'default_name' ] ,
+						$this->creator->config[ 'http' ][ 'header' ][ 'javascript' ]
+					)
+				) ,
+				'key' => 'message' ,
+				'passthru' => true
+			) ;
+		}
+
+		/**
+		* Идентификаторы пользователя
+		* @return array
+		* string( 32 ) $session_id - идентификатор сессии
+		* int $user_id  - идентификатор пользователя
+		*/
+		protected function __ids( ) {
+			$session_id = $this->__arg( 'session_id' ) ;
+			$user_id = $this->session->get( $session_id ) ;
+
+			return array(
+				$session_id ,
+				$user_id
+			) ;
 		}
 
 		/**
@@ -65,81 +120,33 @@
 		/**
 		* Авторизация пользователя
 		* @return array инструкции для дальнейшей обработки запроса
-		* view - имя файла представления
-		* result - дополнительные данные для обработки запроса
-		* result.data - данные для вывода в теле HTTP-ответа
-		* result.passthru - выводить представление не внутри общего представления, а сразу
-		* result.key - имя переменной для присвоения массива сообщений
 		*/
 		public function loginAction( ) {
-			// обработка HTTP-аргумента "action"
-			$this->user->action( ) ;
+			list( $login , $passwd ) = $this->__arg( 'login' , 'passwd' ) ;
+			$result = $this->user->login( $login , $passwd ) ;
 
-			return array(
-				'result' => array(
-					'data' =>  $this->user->login( )
-				) ,
-				'view' => 'json' ,
-				'headers' => array(
-					array(
-						$this->creator->config[ 'http' ][ 'header' ][ 'default_name' ] ,
-						$this->creator->config[ 'http' ][ 'header' ][ 'javascript' ]
-					)
-				) ,
-				'key' => 'message' ,
-				'passthru' => true
-			) ;
+			return $this->__json( $result ) ;
 		}
 
 		/**
 		* Информация о счёте пользователя
 		* @return array инструкции для дальнейшей обработки запроса
-		* view - имя файла представления
-		* result - дополнительные данные для обработки запроса
-		* result.data - данные для вывода в теле HTTP-ответа
-		* result.passthru - выводить представление не внутри общего представления, а сразу
-		* result.key - имя переменной для присвоения массива сообщений
 		*/
 		public function accountAction( ) {
-			return array(
-				'result' => array(
-					'data' => $this->account->get( )
-				) ,
-				'view' => 'json' ,
-				'headers' => array(
-					array(
-						$this->creator->config[ 'http' ][ 'header' ][ 'default_name' ] ,
-						$this->creator->config[ 'http' ][ 'header' ][ 'javascript' ]
-					)
-				) ,
-				'key' => 'message' ,
-				'passthru' => true
-			) ;
+			list( , $user_id ) = $this->__ids( ) ;
+			$result = $this->account->get( $user_id ) ;
+
+			return $this->__json( $result ) ;
 		}
 
 		/**
 		* Информация о транзакциях счёта пользователя
 		* @return array инструкции для дальнейшей обработки запроса
-		* view - имя файла представления
-		* result - дополнительные данные для обработки запроса
-		* result.data - данные для вывода в теле HTTP-ответа
-		* result.passthru - выводить представление не внутри общего представления, а сразу
-		* result.key - имя переменной для присвоения массива сообщений
 		*/
 		public function account_historyAction( ) {
-			return array(
-				'result' => array(
-					'data' =>  $this->account_history->get( )
-				) ,
-				'view' => 'json' ,
-				'headers' => array(
-					array(
-						$this->creator->config[ 'http' ][ 'header' ][ 'default_name' ] ,
-						$this->creator->config[ 'http' ][ 'header' ][ 'javascript' ]
-					)
-				) ,
-				'key' => 'message' ,
-				'passthru' => true
-			) ;
+			list( , $user_id ) = $this->__ids( ) ;
+			$result = $this->account_history->get( $user_id ) ;
+
+			return $this->__json( $result ) ;
 		}
 	}

@@ -5,8 +5,8 @@
 	*/
 	namespace Application\Model ;
 
-	/** класс модели должности
+	/** класс модели пользователя
 	* @subpackage \Application\Model модель
 	* @author Shatrov Aleksej <mail@ashatrov.ru>
 	*/
-	class Position extends \Application\Model { }
+	class User extends \Application\Model {}

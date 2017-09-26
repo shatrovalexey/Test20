@@ -5,8 +5,11 @@
 	*/
 	namespace Application\Model ;
 
-	/** класс модели работника
+	/** класс модели счёта
 	* @subpackage \Application\Model модель
 	* @author Shatrov Aleksej <mail@ashatrov.ru>
 	*/
-	class Employer extends \Application\Model {}
+	class Account extends \Application\Model {
+		public function withdrawal( ) {
+		}
+	}
