@@ -12,6 +12,12 @@
 	</head>
 	<body>
 		<div class="overlay">{include file=$include}</div>
+		<div>
+			<span>Авторы:</span>
+			{foreach from=$config->include->composer->authors item=author}
+				<span>{$author->name|htmlspecialchars} &lt;{$author->email|htmlspecialchars}&gt;</span>
+			{/foreach}
+		</div>
 	</body>
 </html>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
