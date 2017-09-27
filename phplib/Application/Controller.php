@@ -159,6 +159,31 @@
 			}
 
 			$result = array(
+				'session_id' => $session_id ,
+				'user' => $this->user->info( $session_id ) ,
+				'account' => $this->account->info( $session_id ) ,
+				'account_history' => $this->account_history->info( $session_id )
+			) ;
+
+			return $this->__json( $result ) ;
+		}
+
+		/**
+		* Ввод средств
+		* @return array инструкции для дальнейшей обработки запроса
+		*/
+		public function fundAction( ) {
+			list( $session_id , $user_id ) = $this->__ids( ) ;
+			$amount = $this->__arg( 'amount' ) ;
+			$account_history_id = $this->account->fund( $user_id , $amount ) ;
+			$result = null ;
+
+			if ( empty( $account_history_id ) ) {
+				return $this->__json( $result ) ;
+			}
+
+			$result = array(
+				'session_id' => $session_id ,
 				'user' => $this->user->info( $session_id ) ,
 				'account' => $this->account->info( $session_id ) ,
 				'account_history' => $this->account_history->info( $session_id )

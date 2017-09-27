@@ -29,29 +29,52 @@
 			<input type="submit" value="&rarr;">
 		</label>
 	</form>
+
 	<form action="/withdrawal" method="post" class="form-account nod">
 		<input type="hidden" name="session_id" value="">
-		<h2>
-			<span>счёт №</span>
-			<span class="form-account-account_id"></span>
-		</h2>
-		<div>
-			<span>создан</span>
-			<span class="form-account-created"></span>
+		<fieldset>
+			<legend>
+				<h2>
+					<span>счёт №</span>
+					<span class="form-account-account_id"></span>
+				</h2>
+			</legend>
+			<div>
+				<span>создан</span>
+				<span class="form-account-created"></span>
 
-			<span>баланс</span>
-			<span class="form-account-amount"></span>
-		</div>
+				<span>баланс</span>
+				<span class="form-account-amount"></span>
+			</div>
+		</fieldset>
 		<fieldset>
 			<legend>
 				<h2>Вывод средств</h2>
 			</legend>
 			<label>
 				<span>укажите сумму</span>
-				<input type="number" name="amount" min="0" maxlength="22" required>
+				<input type="number" name="amount" value="1" min="1" maxlength="22" required>
 			</label>
 			<label>
 				<span>вывести</span>
+				<input type="submit" value="&rarr;">
+			</label>
+			<label class="error nod">Ошибка операции</label>
+		</fieldset>
+	</form>
+
+	<form action="/fund" method="post" class="form-fund nod">
+		<input type="hidden" name="session_id" value="">
+		<fieldset>
+			<legend>
+				<h2>Ввод средств</h2>
+			</legend>
+			<label>
+				<span>укажите сумму</span>
+				<input type="number" name="amount" value="1" min="1" maxlength="22" required>
+			</label>
+			<label>
+				<span>ввести</span>
 				<input type="submit" value="&rarr;">
 			</label>
 			<label class="error nod">Ошибка операции</label>

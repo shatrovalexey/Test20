@@ -1,3 +1,7 @@
+<IfModule pagespeed_module>
+	Modpagespeed Off
+</IfModule>
+
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -46,26 +46,31 @@ ORDER BY
 		}
 
 		/**
+		* Создать транзакцию по счёту
+		* @param int $user_id - идентификатор пользователя
+		* @param double $amount - сумма для вывода
+		* @param boolean $array - направление "0" - дебет, "1" - кредит
+		* @return int - идентификатор транзакции
+		*/
+		protected function __createTransaction( $account_id , $amount , $array ) {
+			return $this->__fetchColumn( '
+SELECT
+	`fi_account_history`( :account_id , :amount , :array ) AS `account_history_id` ;
+			' , array(
+				'account_id' => $account_id ,
+				'amount' => $amount ,
+				'array' => $array
+			) ) ;
+		}
+
+		/**
 		* Ввод средств на счёт
 		* @param int $user_id - идентификатор пользователя
 		* @param double $amount - сумма для вывода
 		* @return int - идентификатор транзакции
 		*/
 		public function createCredit( $account_id , $amount ) {
-			$this->dbh->query( '
-INSERT INTO
-	`account_history`
-SET
-	`account_id` := :account_id ,
-	`amount` := :amount ,
-	`array` := :array ;
-			' )->execute( array(
-				'account_id' => $account_id ,
-				'amount' => $amount ,
-				'array' => true
-			) ) ;
-
-			return $this->dbh->lastInsertId( ) ;
+			return $this->__createTransaction( $account_id , $amount , false ) ;
 		}
 
 		/**
@@ -75,13 +80,6 @@ SET
 		* @return int - идентификатор транзакции
 		*/
 		public function createDebit( $account_id , $amount ) {
-			return $this->__fetchColumn( '
-SELECT
-	`fi_account_history`( :account_id , :amount , :array ) AS `account_history_id` ;
-			' , array(
-				'account_id' => $account_id ,
-				'amount' => $amount ,
-				'array' => false
-			) ) ;
+			return $this->__createTransaction( $account_id , $amount , true ) ;
 		}
 	}

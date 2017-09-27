@@ -29,24 +29,27 @@ jQuery( function( ) {
 
 	var $formUser = jQuery( ".form-user" ) ;
 	var $formAccount = jQuery( ".form-account" ).on( "submit" , $formAction ) ;
+	var $formFund = jQuery( ".form-fund" ).on( "submit" , $formAction ) ;
 	var $formAccountHistory = jQuery( ".form-account-history" ) ;
 	var $formAuth = jQuery( ".form-auth" ).on( "submit" , $formAction ) ;
+
+	var $formAccountHistoryList = $formAccountHistory.find( ".form-account-history-list" ) ;
+	var $formAccountHistoryListItem = $formAccountHistoryList.find( "li.nod" ).clone( true ) ;
 
 	var $initInterface = function( ) {
 		$formUser.find( ".form-user-login" ).text( this.data.user.login ) ;
 		$formUser.find( ".form-user-created" ).text( this.data.user.created ) ;
+
+		$formFund.find( "input[name=session_id]" ).val( this.data.session_id ) ;
 
 		$formAccount.find( "input[name=session_id]" ).val( this.data.session_id ) ;
 		$formAccount.find( ".form-account-account_id" ).text( this.data.account.id ) ;
 		$formAccount.find( ".form-account-created" ).text( this.data.account.created ) ;
 		$formAccount.find( ".form-account-amount" ).text( this.data.account.amount ) ;
 
-		var $list = $formAccountHistory.find( ".form-account-history-list" ) ;
-		var $item = $list.find( "li.nod" ).clone( true ) ;
-
-		$list.empty( ) ;
-		jQuery( this.data.account_history ).each( function( $i ) {
-			var $itemCurrent = $item.clone( true ) ;
+		$formAccountHistoryList.empty( ) ;
+		jQuery( this.data.account_history ).each( function( ) {
+			var $itemCurrent = $formAccountHistoryListItem.clone( true ) ;
 			var $className = "account_history-" ;
 			switch ( this.array ) {
 				case "0" : {
@@ -67,14 +70,15 @@ jQuery( function( ) {
 			$itemCurrent.find( ".form-account-history-id" ).text( this.id ) ;
 			$itemCurrent.find( ".form-account-history-datetime" ).text( this.created ) ;
 			$itemCurrent.find( ".form-account-history-amount" ).text( this.amount ) ;
-			$list.append( $itemCurrent ) ;
+			$formAccountHistoryList.append( $itemCurrent ) ;
 
 			return true ;
 		} ) ;
-		$list.append( $item ) ;
+		$formAccountHistoryList.append( $formAccountHistoryListItem ) ;
 
 		$formAuth.addClass( "nod" ) ;
 		$formAccount.removeClass( "nod" ) ;
+		$formFund.removeClass( "nod" ) ;
 		$formAccountHistory.removeClass( "nod" ) ;
 		$formUser.removeClass( "nod" ) ;
 	} ;

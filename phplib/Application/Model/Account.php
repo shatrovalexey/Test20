@@ -11,12 +11,23 @@
 	*/
 	class Account extends \Application\Model {
 		/**
-		* Вывод средств со счёта
+		* Ввод средств
 		* @param int $user_id - идентификатор пользователя
 		* @param double $amount - сумма для вывода
 		* @return int - идентификатор транзакции
 		*/
 		public function withdrawal( $user_id , $amount ) {
+			$account_id = $this->id( $user_id ) ;
+
+			return $this->creator->account_history->createCredit( $account_id , $amount ) ;
+		}
+		/**
+		* Вывод средств со счёта
+		* @param int $user_id - идентификатор пользователя
+		* @param double $amount - сумма для вывода
+		* @return int - идентификатор транзакции
+		*/
+		public function fund( $user_id , $amount ) {
 			$account_id = $this->id( $user_id ) ;
 
 			return $this->creator->account_history->createDebit( $account_id , $amount ) ;

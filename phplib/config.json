@@ -26,7 +26,8 @@
 			"" : "index" ,
 			"login" : "login" ,
 			"account" : "account" ,
-			"withdrawal" : "withdrawal"
+			"withdrawal" : "withdrawal" ,
+			"fund" : "fund"
 		}
 	} ,
 	"http" : {

@@ -39,7 +39,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,1,96.01,'2017-09-27 15:04:55');
+INSERT INTO `account` VALUES (1,1,71.01,'2017-09-27 17:43:45');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `account_history` (
   KEY `fk_account_history_account_idx` (`account_id`),
   KEY `idx_account_id_array` (`account_id`,`array`),
   CONSTRAINT `fk_account_history_account` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='Транзакции счёта';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='Транзакции счёта';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `account_history` (
 
 LOCK TABLES `account_history` WRITE;
 /*!40000 ALTER TABLE `account_history` DISABLE KEYS */;
-INSERT INTO `account_history` VALUES (1,1,100.01,1,'2017-09-27 14:04:57'),(5,1,1.00,0,'2017-09-27 14:51:31'),(6,1,1.00,0,'2017-09-27 14:51:40'),(7,1,1.00,0,'2017-09-27 15:03:26'),(8,1,1.00,0,'2017-09-27 15:04:55');
+INSERT INTO `account_history` VALUES (1,1,100.01,1,'2017-09-27 14:04:57'),(5,1,1.00,0,'2017-09-27 14:51:31'),(6,1,1.00,0,'2017-09-27 14:51:40'),(7,1,1.00,0,'2017-09-27 15:03:26'),(8,1,1.00,0,'2017-09-27 15:04:55'),(9,1,23.00,0,'2017-09-27 17:13:10'),(10,1,0.00,0,'2017-09-27 17:13:58'),(11,1,1.00,0,'2017-09-27 17:15:40'),(12,1,1.00,1,'2017-09-27 17:36:47'),(13,1,1.00,1,'2017-09-27 17:42:03'),(14,1,1.00,1,'2017-09-27 17:43:07'),(15,1,1.00,0,'2017-09-27 17:43:09'),(16,1,1.00,0,'2017-09-27 17:43:35'),(17,1,1.00,1,'2017-09-27 17:43:37'),(18,1,1.00,1,'2017-09-27 17:43:39'),(19,1,1.00,0,'2017-09-27 17:43:42'),(20,1,1.00,0,'2017-09-27 17:43:43'),(21,1,1.00,0,'2017-09-27 17:43:44'),(22,1,1.00,0,'2017-09-27 17:43:45');
 /*!40000 ALTER TABLE `account_history` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -145,7 +145,7 @@ CREATE TABLE `session` (
 
 LOCK TABLES `session` WRITE;
 /*!40000 ALTER TABLE `session` DISABLE KEYS */;
-INSERT INTO `session` VALUES ('8ab50250e4c0a41802a896a733ab9bdd',1,'0000-00-00 00:00:00','2017-09-27 13:01:51'),('be8ce4375495a77a36ff8048974a1af8',1,'2017-09-27 19:04:51','2017-09-27 15:04:51');
+INSERT INTO `session` VALUES ('05f5ca9d26d68e3dfdd8a1fda6a980aa',1,'2017-09-27 21:43:33','2017-09-27 17:43:33'),('8ab50250e4c0a41802a896a733ab9bdd',1,'0000-00-00 00:00:00','2017-09-27 13:01:51'),('be8ce4375495a77a36ff8048974a1af8',1,'2017-09-27 19:04:51','2017-09-27 15:04:51');
 /*!40000 ALTER TABLE `session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -488,4 +488,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-27 19:49:52
+-- Dump completed on 2017-09-27 20:43:58
