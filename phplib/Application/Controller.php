@@ -24,6 +24,11 @@
 			$this->user = new Model\User( $this ) ;
 
 			/**
+			* @var Application\Model\Session $session - объект модели сессии
+			*/
+			$this->session = new Model\Session( $this ) ;
+
+			/**
 			* @var Application\Model\Account $account объект модели счёта
 			*/
 			$this->account = new Model\Account( $this ) ;
@@ -79,8 +84,8 @@
 				'view' => 'json' ,
 				'headers' => array(
 					array(
-						$this->creator->config[ 'http' ][ 'header' ][ 'default_name' ] ,
-						$this->creator->config[ 'http' ][ 'header' ][ 'javascript' ]
+						$this->creator->config->http->header->default_name ,
+						$this->creator->config->http->header->javascript
 					)
 				) ,
 				'key' => 'message' ,

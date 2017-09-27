@@ -1,0 +1,1 @@
+{literal}{"data":{/literal}{$result.data|json_encode}{literal}}{/literal}

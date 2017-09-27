@@ -1,3 +1,5 @@
+Modpagespeed Off
+
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f

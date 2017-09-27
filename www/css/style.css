@@ -1,6 +1,9 @@
 .both {
 	clear: both ;
 }
+.nod {
+	display: none ;
+}
 .overlay {
 	margin: 20px ;
 }
@@ -14,4 +17,28 @@
 }
 .form-auth label span {
 	width: 100px ;
+}
+.form-auth-error {
+	color: red ;
+}
+.form-account-history-id:after {
+	content: "." ;
+}
+.form-account-history-amount {
+	font-weight: bold ;
+}
+.account_history-debet .form-account-history-amount {
+	color: red ;
+}
+.account_history-credit .form-account-history-amount {
+	color: darkgreen ;
+}
+.account_history-debet .form-account-history-amount:before {
+	content: "-" ;
+}
+.account_history-credit .form-account-history-amount:before {
+	content: "+" ;
+}
+.form-account-history-list > li {
+	list-style-type: none ;
 }

@@ -30,12 +30,12 @@ SELECT
 		* @return string - идентификатор сессии
 		*/
 		public function create( $user_id ) {
-			return $this->dbh->__fetchColumn( '
+			return $this->__fetchColumn( '
 SELECT
 	`fi_session`( :user_id , :expires ) ;
 			' , array(
 				'user_id' => $user_id ,
-				'expires' => $this->creator->config->session->expires
+				'expires' => $this->creator->creator->config->session->expires
 			) ) ;
 		}
 	}

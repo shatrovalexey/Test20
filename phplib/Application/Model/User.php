@@ -29,7 +29,48 @@ SELECT
 				return null ;
 			}
 
-			return $this->creator->session->create( $user_id ) ;
+			$session_id = $this->creator->session->create( $user_id ) ;
+
+			if ( empty( $session_id ) ) {
+				return null ;
+			}
+
+			return array(
+				'session_id' => $session_id ,
+				'user' => $this->info( $session_id ) ,
+				'account' => $this->creator->account->info( $session_id ) ,
+				'account_history' => $this->creator->account_history->info( $session_id )
+			) ;
+		}
+
+		/**
+		* Информация о пользователе
+		* @param string $session_id - идентификатор сессии пользователя
+		* @return array - информация о пользователе
+		*/
+		public function info( $session_id ) {
+			$sth = $this->dbh->prepare( '
+SELECT
+	`u1`.`id` ,
+	`u1`.`login` ,
+	`u1`.`created`
+FROM
+	`user` AS `u1`
+
+	INNER JOIN `session` AS `s1` ON
+	( `u1`.`id` = `s1`.`user_id` )
+WHERE
+	( `s1`.`id` = :session_id )
+LIMIT 1 ;
+			' ) ;
+
+			if ( ! $sth->execute( array(
+				'session_id' => $session_id
+			) ) ) {
+				return null ;
+			}
+
+			return $sth->fetch( \PDO::FETCH_ASSOC ) ;
 		}
 
 		/**

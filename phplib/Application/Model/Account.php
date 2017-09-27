@@ -40,4 +40,34 @@ LIMIT 1 ;
 				'user_id' => $user_id
 			) ) ;
 		}
+
+		/**
+		* Информация о счёте
+		* @param string $session_id - идентификатор сессии пользователя
+		* @return array - информация о счёте
+		*/
+		public function info( $session_id ) {
+			$sth = $this->dbh->prepare( '
+SELECT
+	`a1`.`id` ,
+	`a1`.`amount` ,
+	`a1`.`created`
+FROM
+	`account` AS `a1`
+
+	INNER JOIN `session` AS `s1` ON
+	( `s1`.`user_id` = `a1`.`user_id` )
+WHERE
+	( `s1`.`id` = :session_id )
+LIMIT 1 ;
+			' ) ;
+
+			if ( ! $sth->execute( array(
+				'session_id' => $session_id
+			) ) ) {
+				return null ;
+			}
+
+			return $sth->fetch( \PDO::FETCH_ASSOC ) ;
+		}
 	}
