@@ -1,0 +1,5 @@
+CREATE DATABASE `test3` DEFAULT CHARACTER SET utf8 ;
+CREATE USER `test`@`localhost` IDENTIFIED BY 'test' ;
+GRANT ALL PRIVILEGES ON `test3`.* TO `test3`@`localhost` ;
+FLUSH PRIVILEGES ;
+USE `test3` ;
