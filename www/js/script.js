@@ -28,7 +28,8 @@ jQuery( function( ) {
 	} ;
 
 	var $formUser = jQuery( ".form-user" ) ;
-	var $formAccount = jQuery( ".form-account" ).on( "submit" , $formAction ) ;
+	var $formWithdrawal = jQuery( ".form-withdrawal" ).on( "submit" , $formAction ) ;
+	var $formAccount = jQuery( ".form-account" ) ;
 	var $formFund = jQuery( ".form-fund" ).on( "submit" , $formAction ) ;
 	var $formAccountHistory = jQuery( ".form-account-history" ) ;
 	var $formAuth = jQuery( ".form-auth" ).on( "submit" , $formAction ) ;
@@ -41,8 +42,8 @@ jQuery( function( ) {
 		$formUser.find( ".form-user-created" ).text( this.data.user.created ) ;
 
 		$formFund.find( "input[name=session_id]" ).val( this.data.session_id ) ;
+		$formWithdrawal.find( "input[name=session_id]" ).val( this.data.session_id ) ;
 
-		$formAccount.find( "input[name=session_id]" ).val( this.data.session_id ) ;
 		$formAccount.find( ".form-account-account_id" ).text( this.data.account.id ) ;
 		$formAccount.find( ".form-account-created" ).text( this.data.account.created ) ;
 		$formAccount.find( ".form-account-amount" ).text( this.data.account.amount ) ;
@@ -77,6 +78,7 @@ jQuery( function( ) {
 		$formAccountHistoryList.append( $formAccountHistoryListItem ) ;
 
 		$formAuth.addClass( "nod" ) ;
+		$formWithdrawal.removeClass( "nod" ) ;
 		$formAccount.removeClass( "nod" ) ;
 		$formFund.removeClass( "nod" ) ;
 		$formAccountHistory.removeClass( "nod" ) ;

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-09-27 20:25:55
+/* Smarty version 3.1.31, created on 2017-09-27 21:22:58
   from "/mnt/sdb1/www/test2/view/index.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_59cbdf23e5cd76_63788189',
+  'unifunc' => 'content_59cbec823635f9_62608190',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aff367784d46d5eefef5a1c32e873b2ef7adcc78' => 
     array (
       0 => '/mnt/sdb1/www/test2/view/index.tpl',
-      1 => 1506533154,
+      1 => 1506536577,
       2 => 'file',
     ),
   ),
@@ -20,30 +20,37 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59cbdf23e5cd76_63788189 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59cbec823635f9_62608190 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 	<form action="/login" method="post" class="form-auth">
-		<h2>Авторизация</h2>
-		<label>
-			<span>логин:</span>
-			<input name="login" value="test" maxlength="20" required>
-			<div class="both"></div>
-		</label>
-		<label>
-			<span>пароль:</span>
-			<input type="password" value="test" name="passwd" maxlength="20" required>
-			<div class="both"></div>
-		</label>
-		<label>
-			<span>авторизация</span>
-			<input type="submit" value="&rarr;">
-			<div class="both"></div>
-		</label>
-		<label class="error nod">Ошибка авторизации</label>
+		<fieldset>
+			<legend>
+				<h2>авторизация</h2>
+			</legend>
+			<label>
+				<span>логин:</span>
+				<input name="login" value="test" maxlength="20" required>
+				<div class="both"></div>
+			</label>
+			<label>
+				<span>пароль:</span>
+				<input type="password" value="test" name="passwd" maxlength="20" required>
+				<div class="both"></div>
+			</label>
+			<label>
+				<span>авторизация</span>
+				<input type="submit" value="&rarr;">
+				<div class="both"></div>
+			</label>
+			<label class="error nod">Ошибка авторизации</label>
+		</fieldset>
 	</form>
 
 	<form action="/" class="form-user nod">
-		<h2 class="form-user-login"></h2>
+		<h2>
+			<span>пользователь</span>
+			<span class="form-user-login"></span>
+		</h2>
 		<div>
 			<span>зарегистрирован</span>
 			<span class="form-user-created"></span>
@@ -54,26 +61,26 @@ function content_59cbdf23e5cd76_63788189 (Smarty_Internal_Template $_smarty_tpl)
 		</label>
 	</form>
 
-	<form action="/withdrawal" method="post" class="form-account nod">
+	<fieldset class="form-account nod">
+		<legend>
+			<h2>
+				<span>счёт №</span>
+				<span class="form-account-account_id"></span>
+			</h2>
+		</legend>
+		<div>
+			<span>создан</span>
+			<span class="form-account-created"></span>
+			<span>баланс</span>
+			<span class="form-account-amount"></span>
+		</div>
+	</fieldset>
+
+	<form action="/withdrawal" method="post" class="form-withdrawal nod">
 		<input type="hidden" name="session_id" value="">
 		<fieldset>
 			<legend>
-				<h2>
-					<span>счёт №</span>
-					<span class="form-account-account_id"></span>
-				</h2>
-			</legend>
-			<div>
-				<span>создан</span>
-				<span class="form-account-created"></span>
-
-				<span>баланс</span>
-				<span class="form-account-amount"></span>
-			</div>
-		</fieldset>
-		<fieldset>
-			<legend>
-				<h2>Вывод средств</h2>
+				<h2>вывод средств</h2>
 			</legend>
 			<label>
 				<span>укажите сумму</span>
@@ -87,11 +94,11 @@ function content_59cbdf23e5cd76_63788189 (Smarty_Internal_Template $_smarty_tpl)
 		</fieldset>
 	</form>
 
-	<form action="/fund" method="post" class="form-fund nod">
+	<form action="/fund" method="post" class="form-fund nod both">
 		<input type="hidden" name="session_id" value="">
 		<fieldset>
 			<legend>
-				<h2>Ввод средств</h2>
+				<h2>ввод средств</h2>
 			</legend>
 			<label>
 				<span>укажите сумму</span>
@@ -104,6 +111,9 @@ function content_59cbdf23e5cd76_63788189 (Smarty_Internal_Template $_smarty_tpl)
 			<label class="error nod">Ошибка операции</label>
 		</fieldset>
 	</form>
+
+	<div class="both"></div>
+
 	<form class="form-account-history nod">
 		<h2>транзакции</h2>
 

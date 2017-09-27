@@ -42,6 +42,14 @@
 .form-account-history-list > li {
 	list-style-type: none ;
 }
+.form-account-account_id ,
+.form-account-created ,
+.form-account-amount ,
+.form-user-created ,
+.form-user-login ,
 .form-account-history-list > li > span {
-	user-select: all ;
+	-moz-user-select: all ;
+}
+.form-account-amount {
+	font-size: 200% ;
 }

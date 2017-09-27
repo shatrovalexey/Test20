@@ -1,25 +1,32 @@
 	<form action="/login" method="post" class="form-auth">
-		<h2>Авторизация</h2>
-		<label>
-			<span>логин:</span>
-			<input name="login" value="test" maxlength="20" required>
-			<div class="both"></div>
-		</label>
-		<label>
-			<span>пароль:</span>
-			<input type="password" value="test" name="passwd" maxlength="20" required>
-			<div class="both"></div>
-		</label>
-		<label>
-			<span>авторизация</span>
-			<input type="submit" value="&rarr;">
-			<div class="both"></div>
-		</label>
-		<label class="error nod">Ошибка авторизации</label>
+		<fieldset>
+			<legend>
+				<h2>авторизация</h2>
+			</legend>
+			<label>
+				<span>логин:</span>
+				<input name="login" value="test" maxlength="20" required>
+				<div class="both"></div>
+			</label>
+			<label>
+				<span>пароль:</span>
+				<input type="password" value="test" name="passwd" maxlength="20" required>
+				<div class="both"></div>
+			</label>
+			<label>
+				<span>авторизация</span>
+				<input type="submit" value="&rarr;">
+				<div class="both"></div>
+			</label>
+			<label class="error nod">Ошибка авторизации</label>
+		</fieldset>
 	</form>
 
 	<form action="/" class="form-user nod">
-		<h2 class="form-user-login"></h2>
+		<h2>
+			<span>пользователь</span>
+			<span class="form-user-login"></span>
+		</h2>
 		<div>
 			<span>зарегистрирован</span>
 			<span class="form-user-created"></span>
@@ -30,26 +37,26 @@
 		</label>
 	</form>
 
-	<form action="/withdrawal" method="post" class="form-account nod">
+	<fieldset class="form-account nod">
+		<legend>
+			<h2>
+				<span>счёт №</span>
+				<span class="form-account-account_id"></span>
+			</h2>
+		</legend>
+		<div>
+			<span>создан</span>
+			<span class="form-account-created"></span>
+			<span>баланс</span>
+			<span class="form-account-amount"></span>
+		</div>
+	</fieldset>
+
+	<form action="/withdrawal" method="post" class="form-withdrawal nod">
 		<input type="hidden" name="session_id" value="">
 		<fieldset>
 			<legend>
-				<h2>
-					<span>счёт №</span>
-					<span class="form-account-account_id"></span>
-				</h2>
-			</legend>
-			<div>
-				<span>создан</span>
-				<span class="form-account-created"></span>
-
-				<span>баланс</span>
-				<span class="form-account-amount"></span>
-			</div>
-		</fieldset>
-		<fieldset>
-			<legend>
-				<h2>Вывод средств</h2>
+				<h2>вывод средств</h2>
 			</legend>
 			<label>
 				<span>укажите сумму</span>
@@ -63,11 +70,11 @@
 		</fieldset>
 	</form>
 
-	<form action="/fund" method="post" class="form-fund nod">
+	<form action="/fund" method="post" class="form-fund nod both">
 		<input type="hidden" name="session_id" value="">
 		<fieldset>
 			<legend>
-				<h2>Ввод средств</h2>
+				<h2>ввод средств</h2>
 			</legend>
 			<label>
 				<span>укажите сумму</span>
@@ -80,6 +87,9 @@
 			<label class="error nod">Ошибка операции</label>
 		</fieldset>
 	</form>
+
+	<div class="both"></div>
+
 	<form class="form-account-history nod">
 		<h2>транзакции</h2>
 
