@@ -380,6 +380,7 @@ CREATE DEFINER=`root`@`%` FUNCTION `fs_passwd`(
 	`in_login` VARCHAR( 20 ) ,
     `in_passwd` VARCHAR( 20 )
 ) RETURNS char(32) CHARSET utf8
+    DETERMINISTIC
     COMMENT 'Хэш логина и пароля'
 BEGIN
 	RETURN md5( concat( md5( `in_login` ) , md5( `in_passwd` ) ) ) ;
@@ -405,7 +406,7 @@ CREATE DEFINER=`root`@`%` FUNCTION `fs_session`(
     COMMENT 'Идентификатор сессии'
 BEGIN
 	RETURN (
-		SELECT
+		SELECT SQL_SMALL_RESULT
 			`s1`.`id` AS `session_id`
 		FROM
 			`session` AS `s1`
@@ -437,7 +438,7 @@ CREATE DEFINER=`root`@`%` FUNCTION `fs_user`(
     COMMENT 'Идентификатор пользователя по логину и паролю'
 BEGIN
 	RETURN (
-		SELECT
+		SELECT SQL_SMALL_RESULT
 			`u1`.`id` AS `user_id`
         FROM
 			`user` AS `u1`
@@ -487,4 +488,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-27 19:39:44
+-- Dump completed on 2017-09-27 19:49:52
