@@ -78,10 +78,15 @@ jQuery( function( ) {
 		$formAccountHistoryList.append( $formAccountHistoryListItem ) ;
 
 		$formAuth.addClass( "nod" ) ;
-		$formWithdrawal.removeClass( "nod" ) ;
-		$formAccount.removeClass( "nod" ) ;
-		$formFund.removeClass( "nod" ) ;
-		$formAccountHistory.removeClass( "nod" ) ;
-		$formUser.removeClass( "nod" ) ;
+
+		jQuery( [
+			$formWithdrawal ,
+			$formAccount ,
+			$formFund ,
+			$formAccountHistory ,
+			$formUser
+		] ).each( function( ) {
+			jQuery( this ).removeClass( "nod" ) ;
+		} ) ;
 	} ;
 } ) ;
