@@ -162,7 +162,8 @@ CREATE TABLE `user` (
   `passwd` char(32) NOT NULL COMMENT 'пароль',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'дата\\время создания',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `login_UNIQUE` (`login`)
+  UNIQUE KEY `login_UNIQUE` (`login`),
+  UNIQUE KEY `passwd` (`passwd`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='пользователь';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -486,4 +487,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-27 19:37:40
+-- Dump completed on 2017-09-27 19:39:44
