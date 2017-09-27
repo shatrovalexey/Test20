@@ -1,6 +1,9 @@
 {
 	"charset" : "utf-8" ,
 	"author" : "Шатров Алексей <mail[at]ashatrov.ru>" ,
+	"session" : {
+		"expires" : 3600
+	} ,
 	"db" : {
 		"dsn" : "mysql:dbname=test3;host=localhost" ,
 		"user" : "test3" ,

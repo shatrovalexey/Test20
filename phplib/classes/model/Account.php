@@ -18,9 +18,8 @@
 		*/
 		public function withdrawal( $user_id , $amount ) {
 			$account_id = $this->id( $user_id ) ;
-			$result = $this->creator->account_history->create( $account_id , $amount , true ) ;
 
-			return $result ;
+			return $this->creator->account_history->createDebit( $account_id , $amount ) ;
 		}
 
 		/**
@@ -29,13 +28,14 @@
 		* @return int - идентификатор счёта
 		*/
 		public function id( $user_id ) {
-			return $this->__fetchSingle( '
-SELECT
+			return $this->__fetchColumn( '
+SELECT SQL_SMALL_RESULT
 	`a1`.`id` AS `account_id`
 FROM
 	`account` AS `a1`
 WHERE
 	( `a1`.`user_id` = :user_id )
+LIMIT 1 ;
 			' , array(
 				'user_id' => $user_id
 			) ) ;

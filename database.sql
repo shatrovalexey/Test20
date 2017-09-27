@@ -157,7 +157,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` bigint(22) unsigned NOT NULL COMMENT 'идентификатор',
   `login` varchar(20) NOT NULL COMMENT 'логин',
-  `passwd` varchar(20) NOT NULL COMMENT 'пароль',
+  `passwd` char(32) NOT NULL COMMENT 'пароль',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'дата\\время создания',
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
@@ -182,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-26 12:59:26
+-- Dump completed on 2017-09-27  7:01:23

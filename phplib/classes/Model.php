@@ -63,18 +63,6 @@
 		}
 
 		/**
-		* Последний созданный идентификатор
-		* @return int
-		*/
-		protected function __last_insert_id( ) {
-			return $this->dbh->fetchColumn( '
-SELECT
-	last_insert_id( ) AS `id` ;
-			' ) ;
-		}
-
-
-		/**
 		* Получение значения HTTP-аргумента
 		* @param string $name имя переменной HTTP-запроса
 		* @return mixed

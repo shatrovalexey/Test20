@@ -11,26 +11,58 @@
 	*/
 	class AccountHistory extends \Application\Model {
 		/**
-		* Вывод средств со счёта
+		* Ввод средств на счёт
 		* @param int $user_id - идентификатор пользователя
 		* @param double $amount - сумма для вывода
-		* @param boolean $array - "0" - дебит, "1" - кредит
 		* @return int - идентификатор транзакции
 		*/
-		public function create( $account_id , $amount , $array ) {
-			$account_id = $this->id( $user_id ) ;
-
-			if ( $this->dbh->query( "
+		public function createCredit( $account_id , $amount ) {
+			$this->dbh->query( '
 INSERT INTO
 	`account_history`
 SET
 	`account_id` := :account_id ,
 	`amount` := :amount ,
 	`array` := :array ;
-			" ) ) {
-				return $this->__last_insert_id( ) ;
-			}
+			' )->execute( array(
+				'account_id' => $account_id ,
+				'amount' => $amount ,
+				'array' => true
+			) ) ;
 
-			return null ;
+			return $this->dbh->lastInsertId( ) ;
+		}
+
+		/**
+		* Вывод средств со счёта
+		* @param int $user_id - идентификатор пользователя
+		* @param double $amount - сумма для вывода
+		* @return int - идентификатор транзакции
+		*/
+		public function createDebit( $account_id , $amount ) {
+			$this->dbh->query( '
+INSERT INTO
+	`account_history`(
+		`account_id` ,
+		`amount` ,
+		`array`
+	)
+SELECT SQL_SMALL_RESULT
+	`a1`.`id` AS `account_id` ,
+	:amount AS `amount` ,
+	:array AS `array`
+FROM
+	`account` AS `a1`
+WHERE
+	( `a1`.`id` = :account_id ) AND
+	( `a1`.`amount` >= :amount )
+LIMIT 1 ;
+			' )->execute( array(
+				'account_id' => $account_id ,
+				'amount' => $amount ,
+				'array' => false
+			) ) ;
+
+			return $this->dbh->lastInsertId( ) ;
 		}
 	}
