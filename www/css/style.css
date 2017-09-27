@@ -2,7 +2,7 @@
 	clear: both ;
 }
 .nod {
-	display: none ;
+	display: none !important ;
 }
 .overlay {
 	margin: 20px ;
@@ -18,7 +18,7 @@
 .form-auth label span {
 	width: 100px ;
 }
-.form-auth-error {
+.error {
 	color: red ;
 }
 .form-account-history-id:after {
@@ -41,4 +41,7 @@
 }
 .form-account-history-list > li {
 	list-style-type: none ;
+}
+.form-account-history-list > li > span {
+	user-select: all ;
 }

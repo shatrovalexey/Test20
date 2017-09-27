@@ -18,7 +18,7 @@
 		*/
 		public function login( $login , $passwd ) {
 			$user_id = $this->__fetchColumn( '
-SELECT
+SELECT SQL_SMALL_RESULT SQL_CACHE
 	`fs_user`( :login , :passwd ) AS `user_id` ;
 			' , array(
 				'login' => $login ,
@@ -50,7 +50,7 @@ SELECT
 		*/
 		public function info( $session_id ) {
 			$sth = $this->dbh->prepare( '
-SELECT
+SELECT SQL_SMALL_RESULT SQL_CACHE
 	`u1`.`id` ,
 	`u1`.`login` ,
 	`u1`.`created`
@@ -81,7 +81,7 @@ LIMIT 1 ;
 		*/
 		public function register( $login , $passwd ) {
 			return $this->__fetchColumn( '
-SELECT
+SELECT SQL_SMALL_RESULT SQL_CACHE
 	`fi_user`( :login , :passwd ) AS `user_id` ;
 			' )->execute( array(
 				'login' => $login ,

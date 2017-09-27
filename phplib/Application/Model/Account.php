@@ -48,7 +48,7 @@ LIMIT 1 ;
 		*/
 		public function info( $session_id ) {
 			$sth = $this->dbh->prepare( '
-SELECT
+SELECT SQL_SMALL_RESULT
 	`a1`.`id` ,
 	`a1`.`amount` ,
 	`a1`.`created`

@@ -1,11 +1,11 @@
 jQuery( function( ) {
-	var $formUser = jQuery( ".form-user" ) ;
-	var $formAccount = jQuery( ".form-account" ) ;
-	var $formAccountHistory = jQuery( ".form-account-history" ) ;
-	var $formAuth = jQuery( ".form-auth" ).on( "submit" , function( ) {
+	var $formAction = function( ) {
 		var $self = jQuery( this ) ;
 		var $failure = function( ) {
-			jQuery( ".form-auth-error" ).show( ).hide( 10e3 ) ;
+			var $error = $self.find( ".error" ).removeClass( "nod" ) ;
+			setTimeout( function( ) {
+				$error.addClass( "nod" ) ;
+			} , 5e3 ) ;
 		} ;
 
 		jQuery.ajax( {
@@ -13,20 +13,24 @@ jQuery( function( ) {
 			"type" : $self.attr( "method" ) ,
 			"data" : $self.serialize( ) ,
 			"dataType" : "json" ,
+			"context" : $self ,
 			"success" : function( $data ) {
-				if ( ! $data || ! ( "data" in $data ) || ( $data.data.length != 32 ) ) {
-					$failure.call( this ) ;
+				if ( ! $data || ! ( "data" in $data ) || ! $data.data ) {
+					return $failure.call( this ) ;
 				}
 
-				$initInterface.call( $data ) ;			
+				return $initInterface.call( $data ) ;	
 			} ,
-			"failure" : function( ) {
-				$failure.call( this ) ;
-			}
+			"failure" : $failure
 		} ) ;
 
 		return false ;
-	} ) ;
+	} ;
+
+	var $formUser = jQuery( ".form-user" ) ;
+	var $formAccount = jQuery( ".form-account" ).on( "submit" , $formAction ) ;
+	var $formAccountHistory = jQuery( ".form-account-history" ) ;
+	var $formAuth = jQuery( ".form-auth" ).on( "submit" , $formAction ) ;
 
 	var $initInterface = function( ) {
 		$formUser.find( ".form-user-login" ).text( this.data.user.login ) ;

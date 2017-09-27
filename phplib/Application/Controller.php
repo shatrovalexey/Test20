@@ -101,11 +101,11 @@
 		*/
 		protected function __ids( ) {
 			$session_id = $this->__arg( 'session_id' ) ;
-			$user_id = $this->session->get( $session_id ) ;
+			$user = $this->user->info( $session_id ) ;
 
 			return array(
 				$session_id ,
-				$user_id
+				$user[ 'id' ]
 			) ;
 		}
 
@@ -149,9 +149,20 @@
 		* @return array инструкции для дальнейшей обработки запроса
 		*/
 		public function withdrawalAction( ) {
-			list( , $user_id ) = $this->__ids( ) ;
+			list( $session_id , $user_id ) = $this->__ids( ) ;
 			$amount = $this->__arg( 'amount' ) ;
-			$result = $this->account->withdrawal( $user_id , $amount ) ;
+			$account_history_id = $this->account->withdrawal( $user_id , $amount ) ;
+			$result = null ;
+
+			if ( empty( $account_history_id ) ) {
+				return $this->__json( $result ) ;
+			}
+
+			$result = array(
+				'user' => $this->user->info( $session_id ) ,
+				'account' => $this->account->info( $session_id ) ,
+				'account_history' => $this->account_history->info( $session_id )
+			) ;
 
 			return $this->__json( $result ) ;
 		}

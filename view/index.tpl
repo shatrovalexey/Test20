@@ -2,12 +2,12 @@
 		<h2>Авторизация</h2>
 		<label>
 			<span>логин:</span>
-			<input name="login" maxlength="20" required>
+			<input name="login" value="test" maxlength="20" required>
 			<div class="both"></div>
 		</label>
 		<label>
 			<span>пароль:</span>
-			<input type="password" name="passwd" maxlength="20" required>
+			<input type="password" value="test" name="passwd" maxlength="20" required>
 			<div class="both"></div>
 		</label>
 		<label>
@@ -15,7 +15,7 @@
 			<input type="submit" value="&rarr;">
 			<div class="both"></div>
 		</label>
-		<label class="form-auth-error nod">Ошибка авторизации</label>
+		<label class="error nod">Ошибка авторизации</label>
 	</form>
 
 	<form action="/" class="form-user nod">
@@ -29,7 +29,7 @@
 			<input type="submit" value="&rarr;">
 		</label>
 	</form>
-	<form action="" method="post" class="form-account nod">
+	<form action="/withdrawal" method="post" class="form-account nod">
 		<input type="hidden" name="session_id" value="">
 		<h2>
 			<span>счёт №</span>
@@ -54,6 +54,7 @@
 				<span>вывести</span>
 				<input type="submit" value="&rarr;">
 			</label>
+			<label class="error nod">Ошибка операции</label>
 		</fieldset>
 	</form>
 	<form class="form-account-history nod">

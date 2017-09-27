@@ -17,7 +17,7 @@
 		*/
 		public function id( $user_id ) {
 			return $this->dbh->__fetchColumn( '
-SELECT
+SELECT SQL_SMALL_RESULT SQL_CACHE
 	`fs_session`( :user_id ) AS `session_id` ;
 			' , array(
 				'user_id' => $user_id
