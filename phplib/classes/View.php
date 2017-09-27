@@ -41,10 +41,10 @@
 			$this->parser = new \Smarty( ) ;
 
 			// директория с шаблонами
-			$this->parser->setTemplateDir( $this->getCurrentPath( $this->creator->config[ 'view' ][ 'path' ] ) ) ;
+			$this->parser->setTemplateDir( $this->getCurrentPath( $this->creator->config->view->path ) ) ;
 
 			// директория с кэшем
-			$this->parser->setCompileDir( $this->getCurrentPath( $this->creator->config[ 'view' ][ 'compiled' ] ) ) ;
+			$this->parser->setCompileDir( $this->getCurrentPath( $this->creator->config->view->compiled ) ) ;
 
 			return false ;
 		}
@@ -76,7 +76,7 @@
 
 			// значения по-умолчанию, если не назначены значения meta для страницы
 			if ( empty( $args[ 'result' ][ 'meta' ] ) ) {
-				$args[ 'result' ][ 'meta' ] = ( array ) $this->creator->config[ 'view' ][ 'meta' ] ;
+				$args[ 'result' ][ 'meta' ] = ( array ) $this->creator->config->view->meta ;
 			}
 
 			// отправка заголовков HTTP
@@ -93,12 +93,12 @@
 		* @return string
 		*/
 		protected function getHTTPHeader( $state = self::DEFAULT_STATE , $http_message = null ) {
-			if ( isset( $this->creator->config[ 'http' ][ 'state' ][ $state ][ 'message' ] ) ) {
-				$http_message = $this->creator->config[ 'http' ][ 'state' ][ $state ][ 'message' ] ;
+			if ( isset( $this->creator->config->http->state->$state->message ) ) {
+				$http_message = $this->creator->config->http->state->$state->message ;
 			}
 
-			return sprintf( $this->creator->config[ 'http' ][ 'header' ][ 'pattern' ] ,
-				$this->creator->config[ 'http' ][ 'version' ] , $state , $http_message
+			return sprintf( $this->creator->config->http->header->pattern ,
+				$this->creator->config->http->version , $state , $http_message
 			) ;
 		}
 
@@ -118,7 +118,7 @@
 						'message' => &$message
 					)
 				) ,
-				'view' => $this->creator->config[ 'view' ][ 'error' ]
+				'view' => $this->creator->config->view->error
 			) ) ;
 		}
 
@@ -135,7 +135,7 @@
 
 			// использовать файл по-умочанию, если файл шаблона для ключения не найден
 			if ( empty( $include_file ) ) {
-				$include_file = $this->getViewPath( $this->creator->config[ 'view' ][ 'index' ] ,
+				$include_file = $this->getViewPath( $this->creator->config->view->index ,
 					true ) ;
 			}
 
@@ -196,7 +196,7 @@
 				}
 
 				// вывод заголовка
-				header( sprintf( $this->creator->config[ 'http' ][ 'header' ][ 'sub_pattern' ] , $header[ 0 ] , $header[ 1 ] ) ) ;
+				header( sprintf( $this->creator->config->http->header->sub_pattern , $header[ 0 ] , $header[ 1 ] ) ) ;
 
 				// заголовок Content-Type выведен
 				if ( $header_default_name_found ) {
@@ -205,7 +205,7 @@
 
 				// имя заголовка Content-Type
 				if ( strToLower( $header[ 0 ] ) !=
-					strToLower( $this->creator->config[ 'http' ][ 'header' ][ 'default_name' ] ) ) {
+					strToLower( $this->creator->config->http->header->default_name ) ) {
 					continue ;
 				}
 
@@ -218,7 +218,7 @@
 			}
 
 			// вывод заголовка Content-Type по-умолчанию
-			header( $this->creator->config[ 'http' ][ 'header' ][ 'default' ] ) ;
+			header( $this->creator->config->http->header->default ) ;
 
 			return true ;
 		}
@@ -230,15 +230,16 @@
 		protected function getViewPath( $name = null , $real_path = false ) {
 			/** если имя файла шаблона пустое, то использовать имя по-умолчанию
 			*/
+
 			if ( is_null( $name ) ) {
-				$name = $this->creator->config[ 'view' ][ 'default' ] ;
+				$name = $this->creator->config->view->default ;
 			}
 
 			/**
 			* @var string $viewPath файл шаблона по имени
 			*/			
-			$viewPath = sprintf( $this->creator->config[ 'view' ][ 'pattern' ] ,
-				$this->getCurrentPath( $this->creator->config[ 'view' ][ 'path' ] ) , $name ) ;
+			$viewPath = sprintf( $this->creator->config->view->pattern ,
+				$this->getCurrentPath( $this->creator->config->view->path ) , $name ) ;
 
 			/**
 			* полный путь к файлу шаблона

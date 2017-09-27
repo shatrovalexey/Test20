@@ -79,7 +79,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_UNSIGNED_SUBTRACTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`%`*/ /*!50003 TRIGGER `test3`.`account_history_AFTER_INSERT` AFTER INSERT
+/*!50003 CREATE*/ /*!50017 DEFINER=`test`@`%`*/ /*!50003 TRIGGER `test3`.`account_history_AFTER_INSERT` AFTER INSERT
 ON `account_history` FOR EACH ROW CALL `pu_account_amount`( new.`account_id` ) */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -95,7 +95,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_UNSIGNED_SUBTRACTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`%`*/ /*!50003 TRIGGER `test3`.`account_history_AFTER_UPDATE` AFTER UPDATE ON `account_history` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=`test`@`%`*/ /*!50003 TRIGGER `test3`.`account_history_AFTER_UPDATE` AFTER UPDATE ON `account_history` FOR EACH ROW
 CALL `pu_account_amount`( new.`account_id` ) */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -111,7 +111,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_UNSIGNED_SUBTRACTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`%`*/ /*!50003 TRIGGER `test3`.`account_history_AFTER_DELETE` AFTER DELETE ON `account_history` FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=`test`@`%`*/ /*!50003 TRIGGER `test3`.`account_history_AFTER_DELETE` AFTER DELETE ON `account_history` FOR EACH ROW
 CALL `pu_account_amount`( old.`account_id` ) */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

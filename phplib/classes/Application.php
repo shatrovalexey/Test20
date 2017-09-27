@@ -6,11 +6,6 @@
 
 	namespace Application ;
 
-	/** подключение класса чтения настроек
-	* @uses Noodlehaus\Config
-	*/
-        use Noodlehaus\Config ;
-
 	/**
 	* @subpackage Application\Application класс, объединяющий прочие
 	*/
@@ -84,7 +79,7 @@
 		* Подготовка, инициализация переменных объекта к выполнению
 		* @return boolean
 		*/
-		protected function prepare( ) {
+		public function prepare( ) {
 			// вызов подготовки, инициализации объекта в методе Application\Base
 			if ( parent::prepare( ) ) {
 				/**
@@ -96,21 +91,27 @@
 			}
 
 			/**
-			* @var Noodlehaus\Config $config загрузка дерева настроек
+			* @var $config загрузка дерева настроек
 			*/
-		        $this->config = new Config( CONFIG_FILE_NAME ) ;
+		        $this->config = $this->__configure( CONFIG_FILE_NAME ) ;
+
+			if ( ! empty( $this->config->include ) ) {
+				foreach ( $this->config->include as $key => $path ) {
+					$this->config->include->$key = $this->__configure( $path ) ;
+				}
+			}
 
 			/**
 			* @var PDO $dbh создание подключения к СУБД
 			*/
         		$this->dbh = new \PDO(
-                		$this->config[ 'db' ][ 'dsn' ] ,
-		                $this->config[ 'db' ][ 'user' ] ,
-		                $this->config[ 'db' ][ 'password' ]
+                		$this->config->db->dsn ,
+		                $this->config->db->user ,
+		                $this->config->db->password
 		        ) ;
 
 			// установка кодировки для подключения к СУБД
-		        $this->dbh->query( 'SET names ' . $this->config[ 'db' ][ 'charset' ] ) ;
+		        $this->dbh->query( 'SET names ' . $this->config->db->charset ) ;
 
 			/**
 			* @var Application\Router $router объект машрутизатора
@@ -129,6 +130,16 @@
  
 			// возвращает false, если метод был запущены впервые
 			return false ;
+		}
+
+		protected function __configure( $path ) {
+			$contents = @file_get_contents( $path ) ;
+
+			if ( empty( $contents ) ) {
+				return new \stdClass( ) ;
+			}
+
+			return @json_decode( $contents ) ;
 		}
 
 		/**
@@ -159,11 +170,6 @@
 			* Вызов метода родителя
 			*/
 			if ( parent::finish( ) ) {
-				/**
-				* Закрытие подключения к СУБД
-				*/
-				$this->pdo->close( ) ;
-
 				return true ;
 			}
 

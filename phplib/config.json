@@ -1,8 +1,10 @@
 {
 	"charset" : "utf-8" ,
-	"author" : "Шатров Алексей <mail[at]ashatrov.ru>" ,
 	"session" : {
 		"expires" : 3600
+	} ,
+	"include" : {
+		"composer" : "../composer.json"
 	} ,
 	"db" : {
 		"dsn" : "mysql:dbname=test3;host=localhost" ,
@@ -18,7 +20,7 @@
 		"path" : "../../view" ,
 		"compiled" : "../../tmp" ,
 		"meta" : {
-			"title" : "Тестовое задание №1"
+			"title" : "Тестовое задание №20"
 		}
 	} ,
 	"router" : {

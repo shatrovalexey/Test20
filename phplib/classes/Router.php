@@ -41,7 +41,11 @@
 		*/
 		protected function prepare( ) {
 			$this->redirect_url = &$this->creator->server[ 'REDIRECT_URL' ] ;
-			$this->redirect_url_name = substr( $this->redirect_url , 1 ) ;
+			if ( empty( $this->redirect_url ) ) {
+				$this->redirect_url_name = '' ;
+			} else {
+				$this->redirect_url_name = substr( $this->redirect_url , 1 ) ;
+			}
 			$this->headers = array( ) ;
 
 			return false ;
