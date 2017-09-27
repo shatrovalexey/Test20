@@ -42,7 +42,7 @@
 		protected function prepare( ) {
 			$this->redirect_url = &$this->creator->server[ 'REDIRECT_URL' ] ;
 			if ( empty( $this->redirect_url ) ) {
-				$this->redirect_url_name = '' ;
+				$this->redirect_url_name = '_empty_' ;
 			} else {
 				$this->redirect_url_name = substr( $this->redirect_url , 1 ) ;
 			}

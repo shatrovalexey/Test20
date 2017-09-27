@@ -18,10 +18,7 @@
 		"error" : "error" ,
 		"pattern" : "%s/%s.tpl" ,
 		"path" : "../../view" ,
-		"compiled" : "../../tmp" ,
-		"meta" : {
-			"title" : "Тестовое задание №20"
-		}
+		"compiled" : "../../tmp"
 	} ,
 	"router" : {
 		"action" : "%sAction" ,
