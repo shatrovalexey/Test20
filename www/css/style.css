@@ -1,0 +1,17 @@
+.both {
+	clear: both ;
+}
+.overlay {
+	margin: 20px ;
+}
+.form-auth label {
+	display: block ;
+}
+.form-auth label span ,
+.form-auth label input {
+	display: block ;
+	float: left ;
+}
+.form-auth label span {
+	width: 100px ;
+}

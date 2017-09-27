@@ -74,11 +74,6 @@
 				$this->getHTTPHeader( $args[ 'result' ][ 'state' ] )
 			) ;
 
-			// значения по-умолчанию, если не назначены значения meta для страницы
-			if ( empty( $args[ 'result' ][ 'meta' ] ) ) {
-				$args[ 'result' ][ 'meta' ] = ( array ) $this->creator->config->view->meta ;
-			}
-
 			// отправка заголовков HTTP
 			$this->sendHeaders( $args[ 'result' ][ 'headers' ] ) ;
 
