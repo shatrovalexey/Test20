@@ -1,0 +1,19 @@
+{
+    "name": "ashatrov/test20",
+    "description": "Test package",
+    "license": "GPL 3",
+    "authors": [
+        {
+            "name": "Shatrov Aleksej",
+            "email": "mail@ashatrov.ru"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "^3.1"
+    } ,
+    "autoload" : {
+       "psr-0" : {
+         "" : "phplib/"
+       }
+    }
+}

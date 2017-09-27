@@ -13,4 +13,4 @@
 	define( 'CONFIG_FILE_NAME' , __DIR__ . '/config.json' ) ;
 
 	// автозагрузка установленных composer модулей
-	require_once( __DIR__ . '/vendor/autoload.php' ) ;
+	require_once( __DIR__ . '/../vendor/autoload.php' ) ;

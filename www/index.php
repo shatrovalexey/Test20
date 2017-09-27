@@ -1,5 +1,5 @@
 <?php
-	include_once( '../phplib/init.php' ) ;
+	require_once( '../phplib/init.php' ) ;
 
 	$app = new Application\Application( ) ;
 	$app->prepare( ) ;
