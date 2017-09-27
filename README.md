@@ -17,17 +17,17 @@
 * * config.json - настройки проекта
 * * init.php - инициализация окружения для пакета Application
 * * Application/ - пакет Application
-* ** Base.php - базовый класс для всех прочих
-* ** Application.php - обработчик запросов
-* ** Controller.php - контроллер
-* ** Model.php - общий класс для моделей
-* ** Model/ - модели
-* *** User.php - пользователь
-* *** Session.php - сессия
-* *** Account.php - счёт
-* *** AccountHistory.php - транзакции счёта
-* ** Router.php - маршрутизатор
-* ** View.php - представление
+* * * Base.php - базовый класс для всех прочих
+* * * Application.php - обработчик запросов
+* * * Controller.php - контроллер
+* * * Model.php - общий класс для моделей
+* * * Model/ - модели
+* * * * User.php - пользователь
+* * * * Session.php - сессия
+* * * * Account.php - счёт
+* * * * AccountHistory.php - транзакции счёта
+* * * Router.php - маршрутизатор
+* * * View.php - представление
 * view/ - представления
 * * default.tpl - общее представление ("рамка" вокруг контента)
 * * index.tpl - представление главной страницы
